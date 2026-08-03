@@ -216,3 +216,11 @@ for (let i = 0; i < 30; i++) {
   heart.style.animationDelay = Math.random() * 5 + "s";
   heartsBox.appendChild(heart);
 }
+
+/* ---- Adiós definitivo al botón "No" cuando dice Chi ---- */
+document.getElementById("yes").addEventListener("click", function () {
+  var n = document.getElementById("no");
+  if (n && n.parentNode) n.parentNode.removeChild(n);      // lo elimina de verdad
+  var l = document.getElementById("noLayer");
+  if (l && l.parentNode) l.parentNode.removeChild(l);      // y su capa, si existe
+}, true);
