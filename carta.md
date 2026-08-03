@@ -1,8 +1,6 @@
 # Mi amor ❤️
 
-Escribe aquí tu carta.
-
-Puedes usar varios párrafos.
+Amorchis, de verdad quiero pedirte perdón. Quiero ser el mejor novio que te mereces y seguir demostrándote cada día cuánto te amo de verdad. Mi mayor deseo es hacerte la mujer más feliz del mundo y construir contigo un verdadero hogar, lleno de paz, tranquilidad y mucho amor. Quiero hacer mi vida a tu lado. Sé que no soy perfecto y que a veces puedo cometer errores, pero también sé aprender de ellos, crecer y convertirme cada día en una mejor persona para ti. Quiero estar contigo no solo en tus cumpleaños y en los momentos más felices, sino también en los días difíciles, cuando estés triste, cuando necesites un abrazo o simplemente alguien que nunca te suelte la mano. Porque para mí amarte significa estar contigo en todo momento, hoy y siempre. ❤️
 
 Con mucho cariño,
-[Tu nombre]
+Tu enamorado, Ernesto
