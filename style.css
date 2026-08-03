@@ -1,0 +1,104 @@
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #ffd6e7, #ffeef6);
+  overflow: hidden;
+  height: 100vh;
+
+  /* Centrado con flexbox: SIN transform, para no romper position:fixed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Tarjetas ---------- */
+#main,
+#letter {
+  position: relative;      /* ya no absolute + transform */
+  z-index: 2;
+  background: #ffffffdd;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px #0002;
+  max-width: min(90vw, 520px);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 7vw, 3rem);  /* no se desborda en móvil */
+  color: #d63384;
+  margin: 10px 0;
+}
+
+.emoji {
+  font-size: clamp(48px, 15vw, 70px);
+}
+
+#content {
+  white-space: pre-wrap;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* ---------- Botones ---------- */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 10px;
+  font-family: inherit;
+}
+
+#yes {
+  background: #ff4f93;
+  color: #fff;
+}
+
+/* OJO: sin position / left / top / transform / animation.
+   El JS le pone la posición fija y lo saca a <body>. */
+#no {
+  background: #666;
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Corazones ---------- */
+#hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;   /* que no estorben a los clics */
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  top: 0;
+  animation: f 8s linear infinite;
+  font-size: 24px;
+}
+
+@keyframes f {
+  from { transform: translateY(100vh); }
+  to   { transform: translateY(-20vh); }
+}
