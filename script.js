@@ -1,4 +1,5 @@
-const noBtn = document.getElementById("no");
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
 const msg = document.getElementById("msg");
 
 const frases = [
@@ -7,40 +8,43 @@ const frases = [
     "😭 No seas así",
     "💕 Dale al botón de al lado",
     "✨ Ese botón no funciona jeje",
-    "🥹 Andaleee"
+    "🥹 Andaleee",
+    "😢 No me atraparás",
+    "😂 Casi..."
 ];
 
 let lastMove = 0;
 
-function moverBoton() {
+// Mueve el botón a una posición aleatoria SIEMPRE dentro de la pantalla
+function move() {
 
     const now = Date.now();
 
-    // evita que se mueva demasiadas veces por segundo
-    if (now - lastMove < 250) return;
+    // Evita que se mueva demasiadas veces por segundo
+    if (now - lastMove < 200) return;
 
     lastMove = now;
 
     const margin = 20;
 
-    const maxX = window.innerWidth - noBtn.offsetWidth - margin;
-    const maxY = window.innerHeight - noBtn.offsetHeight - margin;
+    const maxX = window.innerWidth - no.offsetWidth - margin;
+    const maxY = window.innerHeight - no.offsetHeight - margin;
 
-    let x = Math.random() * maxX;
-    let y = Math.random() * maxY;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-    noBtn.style.position = "fixed";
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
+    no.style.position = "fixed";
+    no.style.left = `${x}px`;
+    no.style.top = `${y}px`;
 
     msg.textContent =
         frases[Math.floor(Math.random() * frases.length)];
 }
 
-// Detectar cuando el cursor se acerca
+// Hace que escape cuando el cursor está cerca
 document.addEventListener("mousemove", (e) => {
 
-    const rect = noBtn.getBoundingClientRect();
+    const rect = no.getBoundingClientRect();
 
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -48,15 +52,59 @@ document.addEventListener("mousemove", (e) => {
     const dx = e.clientX - centerX;
     const dy = e.clientY - centerY;
 
-    const distancia = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distancia < 100) {
-        moverBoton();
+    // Solo escapa cuando realmente estás cerca
+    if (distance < 90) {
+        move();
     }
 });
 
-// En celular
-noBtn.addEventListener("touchstart", (e) => {
+// Para dispositivos móviles
+no.addEventListener("touchstart", (e) => {
     e.preventDefault();
-    moverBoton();
+    move();
 });
+
+// Al presionar "Chi"
+yes.onclick = async () => {
+
+    if (typeof confetti === "function") {
+        confetti({
+            particleCount: 250,
+            spread: 120
+        });
+    }
+
+    document.getElementById("main").classList.add("hidden");
+    document.getElementById("letter").classList.remove("hidden");
+
+    try {
+
+        const response = await fetch("carta.md");
+        const texto = await response.text();
+
+        document.getElementById("content").textContent = texto;
+
+    } catch {
+
+        document.getElementById("content").textContent =
+            "Escribe aquí tu carta en el archivo carta.md ❤️";
+    }
+};
+
+// Corazones flotando
+for (let i = 0; i < 30; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.textContent = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+
+    document.body.appendChild(heart);
+}
